@@ -142,6 +142,44 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SourceEngine\CGlobalVarsBase.hpp" />
+    <ClInclude Include="SourceEngine\CHandle.hpp" />
+    <ClInclude Include="SourceEngine\characterset.hpp" />
+    <ClInclude Include="SourceEngine\CInput.hpp" />
+    <ClInclude Include="SourceEngine\ClientClass.hpp" />
+    <ClInclude Include="SourceEngine\Color.hpp" />
+    <ClInclude Include="SourceEngine\Convar.hpp" />
+    <ClInclude Include="SourceEngine\CRC.hpp" />
+    <ClInclude Include="SourceEngine\Definitions.hpp" />
+    <ClInclude Include="SourceEngine\IAppSystem.hpp" />
+    <ClInclude Include="SourceEngine\IBaseClientDll.hpp" />
+    <ClInclude Include="SourceEngine\IClientEntity.hpp" />
+    <ClInclude Include="SourceEngine\IClientEntityList.hpp" />
+    <ClInclude Include="SourceEngine\IClientMode.hpp" />
+    <ClInclude Include="SourceEngine\IClientNetworkable.hpp" />
+    <ClInclude Include="SourceEngine\IClientRenderable.hpp" />
+    <ClInclude Include="SourceEngine\IClientThinkable.hpp" />
+    <ClInclude Include="SourceEngine\IClientUnknown.hpp" />
+    <ClInclude Include="SourceEngine\IConVar.hpp" />
+    <ClInclude Include="SourceEngine\ICvar.hpp" />
+    <ClInclude Include="SourceEngine\IEngineTrace.hpp" />
+    <ClInclude Include="SourceEngine\IHandleEntity.hpp" />
+    <ClInclude Include="SourceEngine\IPanel.hpp" />
+    <ClInclude Include="SourceEngine\ISurface.hpp" />
+    <ClInclude Include="SourceEngine\IVEngineClient.hpp" />
+    <ClInclude Include="SourceEngine\PlayerInfo.hpp" />
+    <ClInclude Include="SourceEngine\QAngle.hpp" />
+    <ClInclude Include="SourceEngine\Recv.hpp" />
+    <ClInclude Include="SourceEngine\SDK.hpp" />
+    <ClInclude Include="Utils.hpp" />
+    <ClInclude Include="SourceEngine\UtlBuffer.hpp" />
+    <ClInclude Include="SourceEngine\UtlMemory.hpp" />
+    <ClInclude Include="SourceEngine\UtlString.hpp" />
+    <ClInclude Include="SourceEngine\UtlVector.hpp" />
+    <ClInclude Include="SourceEngine\Vector.hpp" />
+    <ClInclude Include="SourceEngine\Vector2D.hpp" />
+    <ClInclude Include="SourceEngine\Vector4D.hpp" />
+    <ClInclude Include="SourceEngine\VMatrix.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VMTHook.h" />
@@ -163,6 +201,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SourceEngine\characterset.cpp" />
+    <ClCompile Include="SourceEngine\Convar.cpp" />
+    <ClCompile Include="SourceEngine\CRC.cpp" />
+    <ClCompile Include="SourceEngine\SDK.cpp" />
+    <ClCompile Include="SourceEngine\UtlBuffer.cpp" />
+    <ClCompile Include="SourceEngine\UtlString.cpp" />
+    <ClCompile Include="SourceEngine\Vector.cpp" />
+    <ClCompile Include="SourceEngine\Vector2D.cpp" />
+    <ClCompile Include="SourceEngine\Vector4D.cpp" />
+    <ClCompile Include="SourceEngine\VMatrix.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

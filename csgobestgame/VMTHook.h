@@ -34,6 +34,7 @@ class VMTHook {
 
 	~VMTHook()
 	{
+		ppClassBase = &pOriginalVMTable;
 		delete[] pNewVMTable;
 	}
 
@@ -48,6 +49,6 @@ class VMTHook {
 
 	void Unhook(uint32_t index)
 	{
-		
+		pNewVMTable[index] = pOriginalVMTable[index];
 	}
 };
