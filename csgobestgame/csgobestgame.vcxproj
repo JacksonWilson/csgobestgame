@@ -144,8 +144,10 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="VMTHook.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cheaterinos.cpp" />
     <ClCompile Include="csgobestgame.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
