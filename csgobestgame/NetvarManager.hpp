@@ -3,7 +3,7 @@
 #include <memory>
 #include <iostream>
 #include <unordered_map>
-#include "Recv.hpp"
+#include "SourceEngine/Recv.hpp"
 
 //Forward declaration. The class is defined on the cpp file
 struct NetvarTable;

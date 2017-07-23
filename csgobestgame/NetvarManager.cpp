@@ -2,7 +2,7 @@
 
 #include <fstream>
 #include <utility>
-#include "SDK.hpp"
+#include "SourceEngine/SDK.hpp"
 #include "XorStr.hpp"
 
 using namespace std;
@@ -147,6 +147,7 @@ void NetvarManager::Dump(std::ostream& output, NetvarTable& table, int level)
     char fmt[512] = "";
 
     //yo dawg, i hear u like formatting strings so i am formatting ur formatting string
+	#pragma warning(suppress: 4996)
     sprintf(fmt, "%%-%ds: 0x%%08X\n", 50 - level * 4);
 
     for(auto& prop : table.m_ChildProps) {
@@ -157,6 +158,7 @@ void NetvarManager::Dump(std::ostream& output, NetvarTable& table, int level)
                 output << "|___";
             }
         }
+		#pragma warning(suppress: 4996)
         sprintf(line, fmt, prop.first.c_str(), prop.second + table.m_uOffset);
         output << line;
 
@@ -169,6 +171,7 @@ void NetvarManager::Dump(std::ostream& output, NetvarTable& table, int level)
                 output << "|___";
             }
         }
+		#pragma warning(suppress: 4996)
         sprintf(line, fmt, child.first.c_str(), child.second->m_uOffset);
         output << line;
         Dump(output, *child.second, level + 1);
@@ -187,7 +190,7 @@ uint32_t NetvarManager::GetOffset(const std::string& szTableName, const std::ini
 
     NetvarTable* curTable = table->second.get();
 
-    for(auto i = 0; i < props.size(); i++) {
+    for(size_t i = 0; i < props.size(); i++) {
         std::string propName = *(props.begin() + i);
 
         if(i + 1 < props.size()) {//This index is not the last one

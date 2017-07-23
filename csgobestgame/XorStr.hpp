@@ -122,6 +122,7 @@ static auto w_printf_s = [](const char* fmt, ...) {
 static auto w_sprintf = [](char* buf, const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
+	#pragma warning(suppress: 4996)
     vsprintf(buf, fmt, args);
     va_end(args);
 };

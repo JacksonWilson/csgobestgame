@@ -1,7 +1,7 @@
 #include "SDK.hpp"
 
-#include "Utils.hpp"
-#include "XorStr.hpp"
+#include "../Utils.hpp"
+#include "../XorStr.hpp"
 
 namespace se
 {

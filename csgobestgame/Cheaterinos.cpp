@@ -1,4 +1,0 @@
-
-void BHOPPERINOS(/* local player */) {
-
-}

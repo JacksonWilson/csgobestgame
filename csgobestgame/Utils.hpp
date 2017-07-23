@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <Psapi.h>
 
-#include "SDK.hpp"
+#include "SourceEngine/SDK.hpp"
 #include "CSGOStructs.hpp"
 
 class Utils

@@ -9,6 +9,7 @@
 #include "Vector2D.hpp"
 #include "Vector4D.hpp"
 #include "QAngle.hpp"
+#include "Math.hpp"
 #include "CHandle.hpp"
 #include "CGlobalVarsBase.hpp"
 #include "ClientClass.hpp"
