@@ -27,7 +27,7 @@ bool __stdcall HkCreateMove(float sample_input_frametime, se::CUserCmd* pCmd)
 	if ((pCmd->buttons & IN_JUMP) && !(pLocal->GetFlags() & (int)se::EntityFlags::FL_ONGROUND))
 		pCmd->buttons &= ~IN_JUMP;
 
-	//TriggerBot(pLocal, pCmd);
+	TriggerBot(pLocal, pCmd);
 
 	return bRet;
 }

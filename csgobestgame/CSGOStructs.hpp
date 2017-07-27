@@ -209,8 +209,10 @@ public:
     }
     C_BaseCombatWeapon* GetActiveWeapon()
     {
-        using namespace se;
+		using namespace se;
         static int m_hActiveWeapon = GET_NETVAR(XorStr("DT_BaseCombatCharacter"), XorStr("m_hActiveWeapon"));
+		IClientEntity * test = Interfaces::;
+		CHandle<IClientEntity> fieldValueTest = GetFieldValue<CHandle<IClientEntity>>(m_hActiveWeapon);
         return (C_BaseCombatWeapon*)Interfaces::EntityList()->GetClientEntityFromHandle(GetFieldValue<CHandle<IClientEntity>>(m_hActiveWeapon));
     }
     int GetHealth()
