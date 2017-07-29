@@ -31,8 +31,8 @@ public:
     }
     ~VFTableHook()
     {
-        RestoreTable();
-        if(m_bReplace && m_pNewVMTable) delete[] m_pNewVMTable;
+        /*RestoreTable();
+        if(m_bReplace && m_pNewVMTable) delete[] m_pNewVMTable;*/
     }
 
     void RestoreTable()

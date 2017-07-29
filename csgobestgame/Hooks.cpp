@@ -37,7 +37,7 @@ void Initialize()
     //Find CSGO main window
     while(!(g_hWindow = FindWindowA(XorStr("Valve001"), NULL))) Sleep(200);
 
-    //Replace the WindowProc with our own to capture user input
+    //Rece the WindowProc with our own to capture user input
     if(g_hWindow)
         g_pOldWindowProc = (WNDPROC)SetWindowLongPtr(g_hWindow, GWLP_WNDPROC, (LONG_PTR)HkWndProc);
 

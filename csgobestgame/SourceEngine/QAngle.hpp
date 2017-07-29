@@ -8,4 +8,5 @@ namespace se
 {
     //he he
     typedef Vector QAngle;
+
 }

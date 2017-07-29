@@ -4,6 +4,8 @@
 #include <sstream>
 #include <emmintrin.h>
 
+#define CHECK_VALID( _v ) 0
+
 namespace se
 {
     typedef float vec_t;
@@ -104,6 +106,27 @@ namespace se
             z -= fl;
             return *this;
         }
+
+		Vector Clamp()
+		{
+			CHECK_VALID(*this);
+
+			if (this->x < -89.0f)
+				this->x = -89.0f;
+
+			if (this->x >  89.0f)
+				this->x = 89.0f;
+
+			while (this->y < -180.0f)
+				this->y += 360.0f;
+
+			while (this->y >  180.0f)
+				this->y -= 360.0f;
+
+			this->z = 0.0f;
+
+			return *this;
+		}
 
         // negate the vector components
         void	Negate();
@@ -223,11 +246,11 @@ namespace se
             return *this;
         }
 
-        VectorAligned& operator=(const VectorAligned &vOther)
-        {
-            _mm_store_ps(Base(), _mm_load_ps(vOther.Base()));
-            return *this;
-        }
+		VectorAligned& operator=(const VectorAligned &vOther)
+		{
+			_mm_store_ps(Base(), _mm_load_ps(vOther.Base()));
+			return *this;
+		}
 
         float w;
     };

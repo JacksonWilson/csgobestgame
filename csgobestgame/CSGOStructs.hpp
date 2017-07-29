@@ -211,7 +211,6 @@ public:
     {
 		using namespace se;
         static int m_hActiveWeapon = GET_NETVAR(XorStr("DT_BaseCombatCharacter"), XorStr("m_hActiveWeapon"));
-		IClientEntity * test = Interfaces::;
 		CHandle<IClientEntity> fieldValueTest = GetFieldValue<CHandle<IClientEntity>>(m_hActiveWeapon);
         return (C_BaseCombatWeapon*)Interfaces::EntityList()->GetClientEntityFromHandle(GetFieldValue<CHandle<IClientEntity>>(m_hActiveWeapon));
     }
@@ -254,6 +253,21 @@ public:
     {
         return GetOrigin() + GetViewOffset();
     }
+	se::Vector GetBonePosition(int iBone)
+	{
+		se::matrix3x4_t boneMatrixes[128];
+		if (this->SetupBones(boneMatrixes, 128, 0x100, 0))
+		{
+			se::matrix3x4_t boneMatrix = boneMatrixes[iBone];
+			return se::Vector(boneMatrix.m_flMatVal[0][3], boneMatrix.m_flMatVal[1][3], boneMatrix.m_flMatVal[2][3]);
+		}
+		else return se::Vector(0, 0, 0);
+	}
+	se::Vector* GetVelocity()
+	{
+		static int m_viewPunchAngle = GET_NETVAR(XorStr("DT_BasePlayer"), XorStr("localdata"), XorStr("m_vecVelocity[0]"));
+		return GetFieldPointer<se::Vector>(m_viewPunchAngle);
+	}
     se::Vector* ViewPunch()
     {
         static int m_viewPunchAngle = GET_NETVAR(XorStr("DT_BasePlayer"), XorStr("localdata"), XorStr("m_Local"), XorStr("m_viewPunchAngle"));

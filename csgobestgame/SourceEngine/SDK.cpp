@@ -44,7 +44,7 @@ namespace se
         }
         return m_pClient;
     }
-    IClientEntityList* Interfaces::EntityList()
+	IClientEntityList* Interfaces::EntityList()
     {
         if(!m_pEntityList) {
             CreateInterfaceFn pfnFactory = GetFactory(GetModuleHandleA(XorStr("client.dll")));
@@ -55,10 +55,23 @@ namespace se
     CGlobalVarsBase* Interfaces::GlobalVars()
     {
         if(!m_pGlobals) {
-            auto uAddress = Utils::FindSignature(XorStr("client.dll"), XorStr("68 ? ? ? ? 68 ? ? ? ? FF 50 08 85 C0"));
+            /*auto uAddress = Utils::FindSignature(XorStr("client.dll"), XorStr("68 ? ? ? ? 68 ? ? ? ? FF 50 08 85 C0"));
             uint32_t g_dwGlobalVarsBase = *(uint32_t*)(uAddress + 0x1);
-            m_pGlobals = *(CGlobalVarsBase**)(g_dwGlobalVarsBase);
+            m_pGlobals = *(CGlobalVarsBase**)(g_dwGlobalVarsBase);*/
+			m_pGlobals = **(CGlobalVarsBase***)((*(PDWORD*)m_pClient)[0] + 0x1B);
+			/*PDWORD pdwClient = (PDWORD)*(PDWORD)m_pClient;
 
+			DWORD dwInitAddr = (DWORD)(pdwClient[0]);
+
+			for (DWORD dwIter = 0; dwIter <= 0xFF; dwIter++)
+			{
+				if (*(PBYTE)(dwInitAddr + dwIter - 1) == 0x51 && *(PBYTE)(dwInitAddr + dwIter) == 0xA3)
+				{
+					m_pGlobals = (CGlobalVarsBase*)*(PDWORD)*(PDWORD)(dwInitAddr + dwIter + 1);
+
+					break;
+				}
+			}*/
         }
         return m_pGlobals;
     }
