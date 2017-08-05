@@ -1,4 +1,5 @@
 #pragma once
+#include "/Users/jhaak/Source/Repos/csgobestgame/csgobestgame/SourceEngine/IVEngineClient.hpp"
 #define IN_JUMP (1 << 1)
 #define IN_ATTACK (1 << 0)
 #define	HITGROUP_GENERIC 0
@@ -13,6 +14,8 @@
 
 void TriggerBot(C_CSPlayer* pLocal, se::CUserCmd* cmd);
 void AimBot(C_CSPlayer* pLocal, se::CUserCmd * cmd);
+
+se::IVEngineClient *g_EngineClient = nullptr;
 
 typedef bool(__thiscall* CreateMove_t)(se::IClientMode*, float, se::CUserCmd*);
 CreateMove_t g_fnOriginalCreateMove = nullptr;
@@ -108,6 +111,15 @@ bool EntityIsValid(int i, C_CSPlayer * pLocal, se::CUserCmd * cmd)
 	return true;
 }
 
+template <typename T>
+T *CaptureInterface(std::string strModule, std::string strInterface)
+{
+	typedef T *(*CreateInterfaceFn)(const char *szName, int iReturn);
+	CreateInterfaceFn CreateInterface = (CreateInterfaceFn)GetProcAddress(GetModuleHandleA(strModule.c_str()), XorStr("CreateInterface"));
+
+	return CreateInterface(strInterface.c_str(), 0);
+}
+
 void AimBot(C_CSPlayer* pLocal, se::CUserCmd * cmd)
 {
 	se::Ray_t ray;
@@ -151,25 +163,41 @@ void AimBot(C_CSPlayer* pLocal, se::CUserCmd * cmd)
 		}
 	}
 
-	se::IVEngineClient* g_EngineClient = se::Interfaces::Engine();
+	//se::IVEngineClient* g_EngineClient = se::Interfaces::Engine();
+	g_EngineClient = CaptureInterface<se::IVEngineClient>(XorStr("engine.dll"), XorStr("VEngineClient014"));
 
 	// GO TO TARGET
 	if (m_iBestTarget != -1)
 	{
 		pLocal = (C_CSPlayer*)g_EntityList->GetClientEntity(m_iBestTarget);
+		se::Vector lPlayerVecPunch = *pLocal->AimPunch();
 
 		if (!entity)
 			return;
 
 		se::QAngle nViewAngles;
-		se::Vector src = pLocal->GetEyePos();
+		//se::Vector src = pLocal->GetEyePos();
 		se::Vector dst = entity->GetBonePosition(8);
-		se::Vector delta = src - dst;
+		se::Vector src = pLocal->GetEyePos();
+		se::Vector delta;
+
+		delta = dst - src;
+
+		delta.Normalized();
+		
+		delta.x -= lPlayerVecPunch.x;
+		delta.y -= lPlayerVecPunch.y;
+
+		dst = src + delta;
 		se::Math::VectorAngles(delta, nViewAngles);
 
 		//if (pressedKeys[VK_LMENU])
 		//g_EngineClient->SetViewAngles(nViewAngles.Clamp());
-		cmd->viewangles = nViewAngles.Clamp();
+		if (pressedKeys[VK_SPACE]) {
+			cmd->viewangles = delta;
+			g_EngineClient->SetViewAngles(cmd->viewangles.Clamp());
+		}
+		//cmd->viewangles = nViewAngles.Clamp();
 	}
 }
 

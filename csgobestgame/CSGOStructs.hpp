@@ -253,6 +253,12 @@ public:
     {
         return GetOrigin() + GetViewOffset();
     }
+	bool setupBones(se::matrix3x4_t *kostToWorldOut, int maxKosti, int kostMaska, float curtime)
+	{
+		void *rendable = (void*)((DWORD)(this) + 0x4);
+		typedef bool(__thiscall *o_setupBones)(void*, se::matrix3x4_t*, int, int, float);
+		return se::CallVFunction<o_setupBones>(rendable, 13)(rendable, kostToWorldOut, maxKosti, kostMaska, curtime);
+	}
 	se::Vector GetBonePosition(int iBone)
 	{
 		se::matrix3x4_t boneMatrixes[128];
